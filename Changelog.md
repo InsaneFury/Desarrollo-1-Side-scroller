@@ -1,4 +1,11 @@
 # Changelog
+
+## [0.1] - 19-10-2018
+### Añadido
+-Funciones de dibujo y movimiento de las paredes
+-Colision entre jugador y pared
+-Condiciones de victoria y derrota
+
 ## [0.0.2] - 19-10-2018
 ### Añadido
 - Funciones basicas para dibujo y mobimiento del jugador 
