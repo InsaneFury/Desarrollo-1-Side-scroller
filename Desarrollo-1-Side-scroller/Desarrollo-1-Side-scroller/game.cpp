@@ -7,10 +7,17 @@ namespace Juego {
 
 	GameScreen Screens;
 
-	Rectangle player;
+	struct Player {
+		Vector2 position;
+		int radius;
+		Color color;
+	};
 
 	int screenWidth = 800;
 	int screenHeight = 450;
+
+	static Player player;
+
 
 	void core()
 	{
@@ -36,20 +43,25 @@ namespace Juego {
 
 	void InitGame() 
 	{
-		player.x = (float)screenWidth / 8;
-		player.y = (float)screenHeight / 2;
-		player.height = 25;
-		player.width = 25;
+
+		player.radius = 20;
+		player.position = { 80, (float)screenHeight / 2 - player.radius };
 	}
 
 	void UpdateGame() 
 	{
-
+		if (IsKeyDown(KEY_SPACE) ) player.position.y -= 3 * GetFrameTime();
+		else player.position.y += 1 * GetFrameTime();
 	}
 
 	void DrawGame()
 	{
-		DrawRectangle(player.x, player.y, player.width, player.height, BLACK);
+		BeginDrawing();
+		ClearBackground(RAYWHITE);
+		DrawCircle(player.position.x, player.position.y, player.radius, DARKGRAY);
+
+		EndDrawing();
+
 	}
 
 	void UnloadGame()
