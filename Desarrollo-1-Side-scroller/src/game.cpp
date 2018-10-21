@@ -2,6 +2,8 @@
 
 #include "game.h"
 #include "menu.h"
+#include "credits.h"
+
 
 namespace Juego {
 
@@ -167,7 +169,17 @@ namespace Juego {
 		{
 		case menu:
 		{
+			MenuUpdate();
+
+		} break;
+		case game:
+		{
 			UpdateDrawFrame();
+
+		} break;
+		case credits:
+		{
+			CreditsUpdate();
 
 		} break;
 		}

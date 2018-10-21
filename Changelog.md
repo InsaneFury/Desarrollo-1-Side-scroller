@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.1] - 21-10-2018
+### Añadido
+-Reorganizacion de las carpetas
+-Bug menores de colison arreglados
+
 ## [0.1] - 19-10-2018
 ### Añadido
 -Funciones de dibujo y movimiento de las paredes

@@ -18,6 +18,17 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\credits.h" />
+    <ClInclude Include="..\src\game.h" />
+    <ClInclude Include="..\src\menu.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\credits.cpp" />
+    <ClCompile Include="..\src\game.cpp" />
+    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\menu.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{609D17A6-2C63-4F5F-BC96-39BCD34C85AE}</ProjectGuid>
     <RootNamespace>Desarrollo1Sidescroller</RootNamespace>
@@ -134,15 +145,6 @@ XCOPY "$(SolutionDir)res" "$(TargetDir)res" /E /H /R /Y</Command>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="game.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="menu.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="game.h" />
-    <ClInclude Include="menu.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
