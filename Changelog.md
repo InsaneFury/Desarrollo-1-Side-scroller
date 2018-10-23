@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.3] - 21-10-2018
+### Añadido
+-Codigo para añadir texturas
+-Texturas provisionales
+-Bugs con respecto a las texturas
+
+## [0.1.2] - 21-10-2018
+### Añadido
+-Carpeta "res" añadida
+
 ## [0.1.1] - 21-10-2018
 ### Añadido
 -Reorganizacion de las carpetas
