@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2] - 24-10-2018
+### Añadido
+-Bug mayores en relacion al movimiento de las paredes solucionados
+-Codigo relacionado a texturas removido para poder solucionar problemas anteriores+
+
 ## [0.1.3] - 21-10-2018
 ### Añadido
 -Codigo para añadir texturas

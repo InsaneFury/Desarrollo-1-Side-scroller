@@ -9,103 +9,106 @@ namespace Juego {
 
 	GameScreen Screens;
 
-#define MAX_TUBES 2
-#define MAX_FRAME_SPEED     15
-#define MIN_FRAME_SPEED      1
+#define MAX_WALL 100
+#define WALL_WIDTH 80
 
-	struct Player {
+	
+	 struct Player {
 		Vector2 position;
 		int radius;
 		Color color;
-	};
+	} ;
 
-	struct Wall{
+	 struct Wall {
 		Rectangle rec;
 		Color color;
 		bool active;
-	};
+	} ;
 
-	int screenWidth = 800;
-	int screenHeight = 450;
+	
+	 int screenWidth = 800;
+	 int screenHeight = 450;
+
 	static bool gameOver;
 	static bool pause;
 	static int score;
 	static int hiScore = 0;
 
 	static Player player;
-
-	static Wall wall[MAX_TUBES * 2];
-	static Vector2 tubesPos[MAX_TUBES];
-	static Vector2 position;
-	static Rectangle frameRec;
-	static int framesCounter;
-	static int framesSpeed;
-	static int currentFrame;
+	static Wall wall[MAX_WALL * 2];
+	static Vector2 tubesPos[MAX_WALL];
 	static int tubesSpeedX;
 	static bool superfx;
 
-	Texture2D ship;
+	
+	static void InitGame(void);         
+	static void UpdateGame(void);       
+	static void DrawGame(void);         
+	static void UnloadGame(void);       
+	static void UpdateDrawFrame(void);  
 
+										
 	void core()
 	{
-
-		InitWindow(screenWidth, screenHeight, "Asteroids");
+		
+		InitWindow(screenWidth, screenHeight, "sample game: floppy");
 
 		InitGame();
 
-		while (!WindowShouldClose())
+
+
+		SetTargetFPS(60);
+
+		while (!WindowShouldClose())    
 		{
+			
 			Change();
-
 		}
-		UnloadGame();
-		CloseWindow();
 
-	
+
+		
+		UnloadGame();         
+
+		CloseWindow();        
+							  
+
 	}
-
-	void InitGame() 
+	
+	void InitGame()
 	{
-		ship = LoadTexture("res/ship.png");
+		player.radius = 24;
+		player.position =  { 80, (float)screenHeight / 2 - player.radius };
+		tubesSpeedX = 2;
 
-
-		player.radius = 20;
-		player.position = { 80, (float)screenHeight / 2 - player.radius };
-
-		tubesSpeedX = 99;
-
-		for (int i = 0; i < MAX_TUBES; i++)
+		for (int i = 0; i < MAX_WALL; i++)
 		{
 			tubesPos[i].x = 400 + 280 * i;
 			tubesPos[i].y = -GetRandomValue(0, 120);
 		}
 
-		for (int i = 0; i < MAX_TUBES * 2; i += 2)
+		for (int i = 0; i < MAX_WALL * 2; i += 2)
 		{
 			wall[i].rec.x = tubesPos[i / 2].x;
 			wall[i].rec.y = tubesPos[i / 2].y;
-			wall[i].rec.width = 80;
+			wall[i].rec.width = WALL_WIDTH;
 			wall[i].rec.height = 255;
 
 			wall[i + 1].rec.x = tubesPos[i / 2].x;
 			wall[i + 1].rec.y = 600 + tubesPos[i / 2].y - 255;
-			wall[i + 1].rec.width = 80;
+			wall[i + 1].rec.width = WALL_WIDTH;
 			wall[i + 1].rec.height = 255;
 
 			wall[i / 2].active = true;
 		}
 
-		position = { 350.0f, 280.0f };
-		frameRec = { 0.0f, 0.0f, (float)ship.width / 2, (float)ship.height };
-		currentFrame = 0;
+		score = 0;
 
-		framesCounter = 0;
-		framesSpeed = 2;
-		UnloadTexture(ship);
-
+		gameOver = false;
+		superfx = false;
+		pause = false;
 	}
 
-	void UpdateGame() 
+	void UpdateGame()
 	{
 		if (!gameOver)
 		{
@@ -113,38 +116,18 @@ namespace Juego {
 
 			if (!pause)
 			{
+				for (int i = 0; i < MAX_WALL; i++) tubesPos[i].x -= tubesSpeedX * GetFrameTime();
 
-				framesCounter++;
-
-				if (framesCounter >= (60 / framesSpeed))
+				for (int i = 0; i < MAX_WALL * 2; i += 2)
 				{
-					framesCounter = 0;
-					currentFrame++;
-
-					if (currentFrame > 5) currentFrame = 0;
-
-					frameRec.x = (float)currentFrame*(float)ship.width / 6;
+					wall[i].rec.x = tubesPos[i / 2].x;
+					wall[i + 1].rec.x = tubesPos[i / 2].x;
 				}
-
-				if (IsKeyPressed(KEY_RIGHT)) framesSpeed++;
-				else if (IsKeyPressed(KEY_LEFT)) framesSpeed--;
-
-				if (framesSpeed > MAX_FRAME_SPEED) framesSpeed = MAX_FRAME_SPEED;
-				else if (framesSpeed < MIN_FRAME_SPEED) framesSpeed = MIN_FRAME_SPEED;
-
-				//for (int i = 0; i < MAX_TUBES; i++) tubesPos[i].x -= tubesSpeedX ;
-
-				/*for (int i = 0; i < MAX_TUBES * 2; i += 2)
-				{
-					wall[i].rec.x = tubesPos[i / 2].x ;
-					wall[i + 1].rec.x = tubesPos[i / 2].x ;
-				}*/
 
 				if (IsKeyDown(KEY_SPACE) && !gameOver) player.position.y -= 3 * GetFrameTime();
 				else player.position.y += 1 * GetFrameTime();
 
-				// Check Collisions
-				for (int i = 0; i < MAX_TUBES * 2; i++)
+				for (int i = 0; i < MAX_WALL * 2; i++)
 				{
 					if (CheckCollisionCircleRec(player.position, player.radius, wall[i].rec))
 					{
@@ -173,43 +156,46 @@ namespace Juego {
 		}
 	}
 
-	void DrawGame()
+	void DrawGame(void)
 	{
 		BeginDrawing();
+
 		ClearBackground(RAYWHITE);
-		DrawCircle(player.position.x, player.position.y, player.radius, DARKGRAY);
 
-		/*for (int i = 0; i < MAX_TUBES; i++)
+		if (!gameOver)
 		{
-			DrawRectangle(wall[i * 2].rec.x, wall[i * 2].rec.y, wall[i * 2].rec.width, wall[i * 2].rec.height, GRAY);
-			DrawRectangle(wall[i * 2 + 1].rec.x, wall[i * 2 + 1].rec.y, wall[i * 2 + 1].rec.width, wall[i * 2 + 1].rec.height, GRAY);
-		}
-		*/
-		if (superfx)
-		{
-			DrawRectangle(0, 0, screenWidth, screenHeight, WHITE);
-			superfx = false;
-		}
+			DrawCircle(player.position.x, player.position.y, player.radius, DARKGRAY);
 
-		DrawTexture(ship, 15, 40, WHITE);
-		DrawRectangleLines(15, 40, ship.width, ship.height, LIME);
-		DrawRectangleLines(15 + frameRec.x, 40 + frameRec.y, frameRec.width, frameRec.height, RED);
+			for (int i = 0; i < MAX_WALL; i++)
+			{
+				DrawRectangle(wall[i * 2].rec.x, wall[i * 2].rec.y, wall[i * 2].rec.width, wall[i * 2].rec.height, GRAY);
+				DrawRectangle(wall[i * 2 + 1].rec.x, wall[i * 2 + 1].rec.y, wall[i * 2 + 1].rec.width, wall[i * 2 + 1].rec.height, GRAY);
+			}
 
-		for (int i = 0; i < MAX_FRAME_SPEED; i++)
-		{
-			if (i < framesSpeed ) DrawRectangle(250 + 21 * i, 205, 20, 20, RED);
-			DrawRectangleLines(250 + 21 * i, 205, 20, 20, MAROON);
+			if (superfx)
+			{
+				DrawRectangle(0, 0, screenWidth, screenHeight, WHITE);
+				superfx = false;
+			}
+
+			DrawText(FormatText("%04i", score), 20, 20, 40, GRAY);
+			DrawText(FormatText("HI-SCORE: %04i", hiScore), 20, 70, 20, LIGHTGRAY);
+
+			if (pause) DrawText("GAME PAUSED", screenWidth / 2 - MeasureText("GAME PAUSED", 40) / 2, screenHeight / 2 - 40, 40, GRAY);
 		}
-
-		DrawTextureRec(ship, frameRec, position, RED);
+		else DrawText("PRESS [ENTER] TO PLAY AGAIN", GetScreenWidth() / 2 - MeasureText("PRESS [ENTER] TO PLAY AGAIN", 20) / 2, GetScreenHeight() / 2 - 50, 20, GRAY);
 
 		EndDrawing();
-
 	}
 
-	void UnloadGame()
+	void UnloadGame(void)
 	{
-		// TODO: Unload all dynamic loaded data (textures, sounds, models...)
+	}
+
+	void UpdateDrawFrame(void)
+	{
+		UpdateGame();
+		DrawGame();
 	}
 
 	void Change()
@@ -218,8 +204,7 @@ namespace Juego {
 		{
 		case menu:
 		{
-			//MenuUpdate();
-			UpdateDrawFrame();
+			MenuUpdate();
 
 		} break;
 		case game:
@@ -235,9 +220,5 @@ namespace Juego {
 		}
 	}
 
-	void UpdateDrawFrame()
-	{
-		UpdateGame();
-		DrawGame();
-	}
+	
 }
