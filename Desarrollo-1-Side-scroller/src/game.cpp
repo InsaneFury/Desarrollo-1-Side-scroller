@@ -32,15 +32,20 @@ namespace Juego {
 	static bool gameOver;
 	static bool pause;
 	static int score;
+	static int framesSpeed;
+	static int framesCounter;
+	static int currentFrame;
 	static int hiScore = 0;
-
-	static Player player;
-	static Wall wall[MAX_WALL * 2];
-	static Vector2 tubesPos[MAX_WALL];
 	static int tubesSpeedX;
 	static bool superfx;
 
-	
+	static Player player;
+	static Wall wall[MAX_WALL * 2];
+	static Vector2 wallPos[MAX_WALL];
+	Texture2D ship;
+	Vector2 position;
+	Rectangle frameRec;
+
 	static void InitGame(void);         
 	static void UpdateGame(void);       
 	static void DrawGame(void);         
@@ -55,8 +60,6 @@ namespace Juego {
 
 		InitGame();
 
-
-
 		SetTargetFPS(60);
 
 		while (!WindowShouldClose())    
@@ -65,47 +68,49 @@ namespace Juego {
 			Change();
 		}
 
-
-		
-		UnloadGame();         
-
-		CloseWindow();        
-							  
-
+		         
+		Unload();
+		CloseWindow();        						
 	}
 	
 	void InitGame()
 	{
-		player.radius = 24;
-		player.position =  { 80, (float)screenHeight / 2 - player.radius };
-		tubesSpeedX = 2;
+		ship = LoadTexture("res/ship.png");
+
+		
+		tubesSpeedX = 6;
+		framesCounter = 0;
+		score = 0;
+		framesSpeed = 8;
+		currentFrame = 0;
+		frameRec = { 0.0f, 0.0f, (float)ship.width / 2, (float)ship.height };
+		position = { 80, (float)screenWidth/2 };
 
 		for (int i = 0; i < MAX_WALL; i++)
 		{
-			tubesPos[i].x = 400 + 280 * i;
-			tubesPos[i].y = -GetRandomValue(0, 120);
+			wallPos[i].x = 400 + 280 * i;
+			wallPos[i].y = -GetRandomValue(0, 120);
 		}
 
 		for (int i = 0; i < MAX_WALL * 2; i += 2)
 		{
-			wall[i].rec.x = tubesPos[i / 2].x;
-			wall[i].rec.y = tubesPos[i / 2].y;
+			wall[i].rec.x = wallPos[i / 2].x;
+			wall[i].rec.y = wallPos[i / 2].y;
 			wall[i].rec.width = WALL_WIDTH;
 			wall[i].rec.height = 255;
 
-			wall[i + 1].rec.x = tubesPos[i / 2].x;
-			wall[i + 1].rec.y = 600 + tubesPos[i / 2].y - 255;
+			wall[i + 1].rec.x = wallPos[i / 2].x;
+			wall[i + 1].rec.y = 600 + wallPos[i / 2].y - 255;
 			wall[i + 1].rec.width = WALL_WIDTH;
 			wall[i + 1].rec.height = 255;
 
 			wall[i / 2].active = true;
 		}
 
-		score = 0;
-
 		gameOver = false;
 		superfx = false;
 		pause = false;
+
 	}
 
 	void UpdateGame()
@@ -116,25 +121,27 @@ namespace Juego {
 
 			if (!pause)
 			{
-				for (int i = 0; i < MAX_WALL; i++) tubesPos[i].x -= tubesSpeedX * GetFrameTime();
+				for (int i = 0; i < MAX_WALL; i++) wallPos[i].x -= tubesSpeedX * GetFrameTime();
 
 				for (int i = 0; i < MAX_WALL * 2; i += 2)
 				{
-					wall[i].rec.x = tubesPos[i / 2].x;
-					wall[i + 1].rec.x = tubesPos[i / 2].x;
+					wall[i].rec.x = wallPos[i / 2].x;
+					wall[i + 1].rec.x = wallPos[i / 2].x;
 				}
 
-				if (IsKeyDown(KEY_SPACE) && !gameOver) player.position.y -= 3 * GetFrameTime();
-				else player.position.y += 1 * GetFrameTime();
+				if (IsKeyDown(KEY_SPACE) && !gameOver) position.y -= 30 * GetFrameTime();
+				else position.y += 10 * GetFrameTime();
+				
+
 
 				for (int i = 0; i < MAX_WALL * 2; i++)
 				{
-					if (CheckCollisionCircleRec(player.position, player.radius, wall[i].rec))
+					if (CheckCollisionCircleRec(position,ship.width/2 ,wall[i].rec))
 					{
 						gameOver = true;
 						pause = false;
 					}
-					else if ((tubesPos[i / 2].x < player.position.x) && wall[i / 2].active && !gameOver)
+					else if ((wallPos[i / 2].x < player.position.x) && wall[i / 2].active && !gameOver)
 					{
 						score += 100;
 						wall[i / 2].active = false;
@@ -144,6 +151,19 @@ namespace Juego {
 						if (score > hiScore) hiScore = score;
 					}
 				}
+
+				framesCounter++;
+
+				if (framesCounter >= (60 / framesSpeed))
+				{
+					framesCounter = 0;
+					currentFrame++;
+
+					if (currentFrame > 5) currentFrame = 0;
+
+					frameRec.x = (float)currentFrame*(float)ship.width / 2;
+				}
+
 			}
 		}
 		else
@@ -164,14 +184,16 @@ namespace Juego {
 
 		if (!gameOver)
 		{
-			DrawCircle(player.position.x, player.position.y, player.radius, DARKGRAY);
+		
+
+			DrawTextureRec(ship, frameRec, position, WHITE);
 
 			for (int i = 0; i < MAX_WALL; i++)
 			{
 				DrawRectangle(wall[i * 2].rec.x, wall[i * 2].rec.y, wall[i * 2].rec.width, wall[i * 2].rec.height, GRAY);
 				DrawRectangle(wall[i * 2 + 1].rec.x, wall[i * 2 + 1].rec.y, wall[i * 2 + 1].rec.width, wall[i * 2 + 1].rec.height, GRAY);
 			}
-
+			
 			if (superfx)
 			{
 				DrawRectangle(0, 0, screenWidth, screenHeight, WHITE);
@@ -188,11 +210,17 @@ namespace Juego {
 		EndDrawing();
 	}
 
-	void UnloadGame(void)
+	
+	void Unload() 
+	{
+		UnloadTexture(ship);
+		UnloadGame();
+	}
+	void UnloadGame()
 	{
 	}
 
-	void UpdateDrawFrame(void)
+	void UpdateDrawFrame()
 	{
 		UpdateGame();
 		DrawGame();

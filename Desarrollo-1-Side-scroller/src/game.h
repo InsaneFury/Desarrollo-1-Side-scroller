@@ -12,6 +12,7 @@ namespace Juego
 	void UpdateGame();
 	void DrawGame();
 	void UnloadGame();
+	void Unload();
 	void Change();
 	void UpdateDrawFrame();
 

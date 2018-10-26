@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.1] - 25-10-2018
+### Añadido
+-Codigo relacionado a las texturas re-añadido
+-El juegador dejo de ser un circulo y paso a ser una textura animada 
+-Colisiones arregladas para el nuevo jugador
+
 ## [0.2] - 24-10-2018
 ### Añadido
 -Bug mayores en relacion al movimiento de las paredes solucionados
