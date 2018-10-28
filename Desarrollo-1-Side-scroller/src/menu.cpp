@@ -46,7 +46,7 @@ namespace Juego
 				Screens = credits;
 			}
 		}
-		/*if (CheckCollisionPointRec(mousePoint, rec3))
+		if (CheckCollisionPointRec(mousePoint, rec3))
 		{
 
 			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
@@ -54,7 +54,7 @@ namespace Juego
 				Screens = controls;
 			}
 		}
-		*/
+		
 
 	}
 

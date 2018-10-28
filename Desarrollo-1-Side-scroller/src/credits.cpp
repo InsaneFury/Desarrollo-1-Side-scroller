@@ -45,7 +45,7 @@ namespace Juego
 		DrawText("Asteroids, por Martin Concetti", 20, 260, 20, BLACK);
 		DrawText("Creado usando raylib", 130, 280, 20, BLACK);
 		DrawText("Consultantes: Baretto, Sergio", 130, 300, 20, BLACK);
-		DrawText("Version 0.2.1", 130, 320, 20, BLACK);
+		DrawText("Version 0.2.2", 130, 320, 20, BLACK);
 
 		EndDrawing();
 	}

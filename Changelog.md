@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.2] - 28-10-2018
+### Añadido
+-Controles anadidos
+-Texto agragado a la pausa
+-Un bug donde el player podia salir de la pantalla fue eliminado
+
 ## [0.2.1] - 25-10-2018
 ### Añadido
 -Codigo relacionado a las texturas re-añadido

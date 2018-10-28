@@ -3,6 +3,7 @@
 #include "game.h"
 #include "menu.h"
 #include "credits.h"
+#include "controls.h"
 
 
 namespace Juego {
@@ -56,7 +57,7 @@ namespace Juego {
 	void core()
 	{
 		
-		InitWindow(screenWidth, screenHeight, "sample game: floppy");
+		InitWindow(screenWidth, screenHeight, "Basic side scroler");
 
 		InitGame();
 
@@ -77,14 +78,15 @@ namespace Juego {
 	{
 		ship = LoadTexture("res/ship.png");
 
-		
-		tubesSpeedX = 6;
+		player.radius = 24;
+		player.position = { 80, (float)screenHeight / 2 - player.radius };
+		tubesSpeedX = 40;
 		framesCounter = 0;
 		score = 0;
 		framesSpeed = 8;
 		currentFrame = 0;
 		frameRec = { 0.0f, 0.0f, (float)ship.width / 2, (float)ship.height };
-		position = { 80, (float)screenWidth/2 };
+		position = { player.position.x -(player.position .x / 2), player.position.y / 2 };
 
 		for (int i = 0; i < MAX_WALL; i++)
 		{
@@ -129,14 +131,14 @@ namespace Juego {
 					wall[i + 1].rec.x = wallPos[i / 2].x;
 				}
 
-				if (IsKeyDown(KEY_SPACE) && !gameOver) position.y -= 30 * GetFrameTime();
-				else position.y += 10 * GetFrameTime();
+				if (IsKeyDown(KEY_SPACE) && !gameOver) player.position.y -= 160 * GetFrameTime();
+				else player.position.y += 60 * GetFrameTime();
 				
-
+				position = player.position;
 
 				for (int i = 0; i < MAX_WALL * 2; i++)
 				{
-					if (CheckCollisionCircleRec(position,ship.width/2 ,wall[i].rec))
+					if (CheckCollisionCircleRec(player.position,player.radius ,wall[i].rec))
 					{
 						gameOver = true;
 						pause = false;
@@ -164,6 +166,11 @@ namespace Juego {
 					frameRec.x = (float)currentFrame*(float)ship.width / 2;
 				}
 
+				if (player.position.y < 0 ) 
+				{
+					gameOver = true;
+				}
+
 			}
 		}
 		else
@@ -185,8 +192,9 @@ namespace Juego {
 		if (!gameOver)
 		{
 		
+			DrawCircle(player.position.x, player.position.y, player.radius, DARKGRAY);
 
-			DrawTextureRec(ship, frameRec, position, WHITE);
+			DrawTextureRec(ship, frameRec, player.position, WHITE);
 
 			for (int i = 0; i < MAX_WALL; i++)
 			{
@@ -203,7 +211,12 @@ namespace Juego {
 			DrawText(FormatText("%04i", score), 20, 20, 40, GRAY);
 			DrawText(FormatText("HI-SCORE: %04i", hiScore), 20, 70, 20, LIGHTGRAY);
 
-			if (pause) DrawText("GAME PAUSED", screenWidth / 2 - MeasureText("GAME PAUSED", 40) / 2, screenHeight / 2 - 40, 40, GRAY);
+			if (pause) 
+			{
+				DrawText("Pausa", screenWidth / 4, screenHeight / 3, 50, WHITE);
+				DrawText("P para resumir", screenWidth / 4, screenHeight / 3 + 60, 50, WHITE);
+				DrawText("Escape para salir", screenWidth / 4, screenHeight / 3 + 120, 50, WHITE);
+			}
 		}
 		else DrawText("PRESS [ENTER] TO PLAY AGAIN", GetScreenWidth() / 2 - MeasureText("PRESS [ENTER] TO PLAY AGAIN", 20) / 2, GetScreenHeight() / 2 - 50, 20, GRAY);
 
@@ -243,6 +256,11 @@ namespace Juego {
 		case credits:
 		{
 			CreditsUpdate();
+
+		} break;
+		case controls:
+		{
+			ControlsUpdate();
 
 		} break;
 		}
