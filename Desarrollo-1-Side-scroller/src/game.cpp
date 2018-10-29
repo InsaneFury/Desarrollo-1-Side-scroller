@@ -4,7 +4,7 @@
 #include "menu.h"
 #include "credits.h"
 #include "controls.h"
-
+#include "over.h"
 
 namespace Juego {
 
@@ -23,12 +23,12 @@ namespace Juego {
 	} ;
 
 	
-	 int screenWidth = 800;
-	 int screenHeight = 450;
+	int screenWidth = 800;
+	int screenHeight = 450;
 
 	static bool gameOver;
 	static bool pause;
-	static int score;
+	int score;
 	static int framesSpeed;
 	static int framesCounter;
 	static int currentFrame;
@@ -101,7 +101,7 @@ namespace Juego {
 		wallWith = 80;
 		frameRec = { 0.0f, 0.0f, (float)ship.width / 2, (float)ship.height };
 		shardRect = { 0.0f, 0.0f, (float)shard.width,(float)shard.height };
-		position = { player.position.x -(player.position .x / 2), player.position.y / 2 };
+		position = { player.position.x , player.position.y / 2 };
 
 		for (int i = 0; i < maxWall; i++)
 		{

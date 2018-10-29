@@ -23,6 +23,7 @@
     <ClInclude Include="..\src\credits.h" />
     <ClInclude Include="..\src\game.h" />
     <ClInclude Include="..\src\menu.h" />
+    <ClInclude Include="..\src\over.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\controls.cpp" />
@@ -30,6 +31,7 @@
     <ClCompile Include="..\src\game.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\menu.cpp" />
+    <ClCompile Include="..\src\over.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{609D17A6-2C63-4F5F-BC96-39BCD34C85AE}</ProjectGuid>

@@ -9,6 +9,6 @@ namespace Juego
 	extern int screenWidth;
 
 	void MenuUpdate();
-	void  MenuDraw();
+	static void  MenuDraw();
 }
 #endif // !menu_H

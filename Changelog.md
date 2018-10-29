@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.4] - 29-10-2018
+### Añadido
+- Pantalla de game over
+
 ## [0.3] - 28-10-2018
 ### Añadido
 -Se reemplazaron los defines
