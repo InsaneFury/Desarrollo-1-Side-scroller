@@ -8,13 +8,13 @@ namespace Juego
 	extern GameScreen Screens;
 
 	void core();
-	void InitGame();
-	void UpdateGame();
-	void DrawGame();
-	void UnloadGame();
-	void Unload();
-	void Change();
-	void UpdateDrawFrame();
+	static void InitGame();
+	static void UpdateGame();
+	static void DrawGame();
+	static void UnloadGame();
+	static void Unload();
+	static void Change();
+	static void UpdateDrawFrame();
 
 }
 

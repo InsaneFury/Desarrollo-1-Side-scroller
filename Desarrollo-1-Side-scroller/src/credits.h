@@ -7,7 +7,7 @@ namespace Juego
 	extern int screenWidth;
 
 	void CreditsUpdate();
-	void CreditsDraw();
+	static void CreditsDraw();
 }
 
 #endif // !credits_H

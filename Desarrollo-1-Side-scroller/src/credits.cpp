@@ -3,12 +3,13 @@
 #include "credits.h"
 #include "game.h"
 
-Vector2 mousePoint;
-Rectangle rec1;
+
 
 namespace Juego
 {
-	
+	static Vector2 mousePoint;
+	static Rectangle rec1;
+
 	void CreditsUpdate()
 	{
 		CreditsDraw();
@@ -43,9 +44,9 @@ namespace Juego
 		DrawText("atras", rec1.x + 18, rec1.y + 10, 20, WHITE);
 
 		DrawText("Asteroids, por Martin Concetti", 20, 260, 20, BLACK);
-		DrawText("Creado usando raylib", 130, 280, 20, BLACK);
+		DrawText("Creado usando raylib, chip tone, beep box, piskel, ", 130, 280, 20, BLACK);
 		DrawText("Consultantes: Baretto, Sergio", 130, 300, 20, BLACK);
-		DrawText("Version 0.2.2", 130, 320, 20, BLACK);
+		DrawText("Version 0.3", 130, 320, 20, BLACK);
 
 		EndDrawing();
 	}

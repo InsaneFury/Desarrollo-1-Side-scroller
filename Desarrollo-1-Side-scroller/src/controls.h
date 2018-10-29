@@ -7,7 +7,7 @@ namespace Juego
 	extern int screenWidth;
 
 	void ControlsUpdate();
-	void ControlsDraw();
+	static void ControlsDraw();
 }
 
 #endif // !controls_H

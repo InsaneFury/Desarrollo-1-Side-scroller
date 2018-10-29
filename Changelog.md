@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3] - 28-10-2018
+### Añadido
+-Se reemplazaron los defines
+-Se anadio static a las variables que lo necesitaban
+-Se anaden musica y efectos de sonido
+-Se actualizan los creditos con todos los nuevos programas usados
+-Numero de la version agregado al menu
+
 ## [0.2.2] - 28-10-2018
 ### Añadido
 -Controles anadidos
@@ -15,7 +23,7 @@
 ## [0.2] - 24-10-2018
 ### Añadido
 -Bug mayores en relacion al movimiento de las paredes solucionados
--Codigo relacionado a texturas removido para poder solucionar problemas anteriores+
+-Codigo relacionado a texturas removido para poder solucionar problemas anteriores
 
 ## [0.1.3] - 21-10-2018
 ### Añadido
