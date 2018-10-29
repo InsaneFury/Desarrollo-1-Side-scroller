@@ -5,6 +5,7 @@ namespace Juego
 {
 	extern int screenHeight;
 	extern int screenWidth;
+	extern 	Vector2 mousePoint;
 
 	void CreditsUpdate();
 	static void CreditsDraw();

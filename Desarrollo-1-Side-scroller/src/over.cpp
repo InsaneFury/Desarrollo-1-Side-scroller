@@ -6,7 +6,6 @@
 namespace Juego
 {
 
-	static Vector2 mousePoint;
 	static Rectangle rec1;
 	static Rectangle rec2;
 	static Rectangle rec3;
@@ -35,25 +34,11 @@ namespace Juego
 
 			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 			{
-				Screens = game;
+				gameOver = false;
+				Screens = menu;
 			}
 		}
-		if (CheckCollisionPointRec(mousePoint, rec2))
-		{
-
-			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-			{
-				Screens = credits;
-			}
-		}
-		if (CheckCollisionPointRec(mousePoint, rec3))
-		{
-
-			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-			{
-				Screens = controls;
-			}
-		}
+		
 
 
 	}
@@ -62,18 +47,18 @@ namespace Juego
 	{
 		BeginDrawing();
 
-		ClearBackground(RAYWHITE);
+		ClearBackground(DARKGRAY);
 
 
 		DrawRectangle(rec1.x, rec1.y, rec1.width, rec1.height, BLACK);
 		DrawRectangle(rec2.x, rec2.y, rec2.width, rec2.height, BLACK);
 		DrawRectangle(rec3.x, rec3.y, rec3.width, rec3.height, BLACK);
 
-		DrawText(FormatText("%04i", score), rec1.x + 18, rec1.y + 10, 18, WHITE);
-		DrawText("Creditos", rec2.x + 5, rec2.y + 10, 18, WHITE);
-		DrawText("Controles", rec3.x + 5, rec3.y + 10, 18, WHITE);
-		DrawText("Basic side scroler", screenWidth / 2 - 120, 100, 50, MAROON);
-		DrawText("Version 0.3", 10, screenHeight - 10, 10, MAROON);
+		DrawText("Shards", screenWidth/ 2 - 70, screenHeight / 2 - 99, 50, MAROON);
+		DrawText("Perdiste", screenWidth / 2 - 70, screenHeight / 2 - 49, 30, WHITE);
+		DrawText(FormatText("%04i", score), rec1.x + 18, rec1.y + 10, 30, WHITE);
+		//DrawText();
+		DrawText("Version 0.5", 10, screenHeight - 10, 10, MAROON);
 
 		EndDrawing();
 	}

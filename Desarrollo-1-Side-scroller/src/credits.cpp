@@ -7,7 +7,6 @@
 
 namespace Juego
 {
-	static Vector2 mousePoint;
 	static Rectangle rec1;
 
 	void CreditsUpdate()
@@ -46,7 +45,7 @@ namespace Juego
 		DrawText("Asteroids, por Martin Concetti", 20, 260, 20, BLACK);
 		DrawText("Creado usando raylib, chip tone, beep box, piskel, ", 130, 280, 20, BLACK);
 		DrawText("Consultantes: Baretto, Sergio", 130, 300, 20, BLACK);
-		DrawText("Version 0.3", 130, 320, 20, BLACK);
+		DrawText("Version 0.5", 130, 320, 20, BLACK);
 
 		EndDrawing();
 	}

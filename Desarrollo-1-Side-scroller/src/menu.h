@@ -6,7 +6,8 @@ namespace Juego
 {
 
 	extern int screenHeight;
-	extern int screenWidth;
+	extern int screenWidth; 
+	extern 	Vector2 mousePoint;
 
 	void MenuUpdate();
 	static void  MenuDraw();

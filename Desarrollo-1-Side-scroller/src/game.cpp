@@ -26,7 +26,7 @@ namespace Juego {
 	int screenWidth = 800;
 	int screenHeight = 450;
 
-	static bool gameOver;
+	 bool gameOver;
 	static bool pause;
 	int score;
 	static int framesSpeed;
@@ -37,6 +37,7 @@ namespace Juego {
 	static bool superfx;
 	static int maxWall;
 	static int wallWith;
+	static int repeat = 0;
 
 	static Player player;
 	static Wall wall[100 * 2];
@@ -51,6 +52,8 @@ namespace Juego {
 	static Rectangle shardRect;
 	static Music music;
 	static Sound jump;
+	static Rectangle rec1;
+	Vector2 mousePoint;
 
 	static void InitGame(void);         
 	static void UpdateGame(void);       
@@ -62,11 +65,12 @@ namespace Juego {
 	void core()
 	{
 		
-		InitWindow(screenWidth, screenHeight, "Basic side scroler");
+		InitWindow(screenWidth, screenHeight, "Shards");
+
+		SetTargetFPS(60);
 
 		InitGame();
 
-		SetTargetFPS(60);
 
 		while (!WindowShouldClose())    
 		{
@@ -81,14 +85,14 @@ namespace Juego {
 	
 	void InitGame()
 	{
+			ship = LoadTexture("res/ship.png");
+			shard = LoadTexture("res/shard.png");
 
-		ship = LoadTexture("res/ship.png");
-		shard = LoadTexture("res/shard.png");
-
-		InitAudioDevice();
-		music = LoadMusicStream("res/background.ogg");
-		jump = LoadSound("res/jump.wav");
-		PlayMusicStream(music);
+			InitAudioDevice();
+			music = LoadMusicStream("res/background.ogg");
+			jump = LoadSound("res/jump.wav");
+			PlayMusicStream(music);
+		
 
 		player.radius = 24;
 		player.position = { 80, (float)screenHeight / 2 - player.radius };
@@ -101,7 +105,12 @@ namespace Juego {
 		wallWith = 80;
 		frameRec = { 0.0f, 0.0f, (float)ship.width / 2, (float)ship.height };
 		shardRect = { 0.0f, 0.0f, (float)shard.width,(float)shard.height };
-		position = { player.position.x , player.position.y / 2 };
+		position = { player.position.x - player.radius , (player.position.y / 2) - 1200 };
+
+		rec1.x = 0;
+		rec1.y = 400;
+		rec1.height = 50;
+		rec1.width = 100;
 
 		for (int i = 0; i < maxWall; i++)
 		{
@@ -159,7 +168,7 @@ namespace Juego {
 					player.position.y += 60 * GetFrameTime();
 				}
 
-				position = player.position;
+				position = { player.position.x - 1200 , (player.position.y / 2) - 1200 };
 
 				for (int i = 0; i < maxWall * 2; i++)
 				{
@@ -225,11 +234,13 @@ namespace Juego {
 		}
 		else
 		{
-			if (IsKeyPressed(KEY_ENTER))
+			Screens = over;
+			/*if (IsKeyPressed(KEY_ENTER))
 			{
+
 				InitGame();
 				gameOver = false;
-			}
+			}*/
 		}
 
 		if (pause) 
@@ -252,7 +263,9 @@ namespace Juego {
 
 		if (!gameOver)
 		{
-		
+			DrawRectangle(rec1.x, rec1.y, rec1.width, rec1.height, BLACK);
+			DrawText("Pausa", rec1.x + 18, rec1.y + 10, 20, WHITE);
+
 			DrawCircle(player.position.x, player.position.y, player.radius, DARKGRAY);
 
 			DrawTextureRec(ship, frameRec, player.position, WHITE);
@@ -281,7 +294,7 @@ namespace Juego {
 				DrawText("Escape para salir", screenWidth / 4, screenHeight / 3 + 120, 50, WHITE);
 			}
 		}
-		else DrawText("PRESS [ENTER] TO PLAY AGAIN", GetScreenWidth() / 2 - MeasureText("PRESS [ENTER] TO PLAY AGAIN", 20) / 2, GetScreenHeight() / 2 - 50, 20, GRAY);
+		//else DrawText("PRESS [ENTER] TO PLAY AGAIN", GetScreenWidth() / 2 - MeasureText("PRESS [ENTER] TO PLAY AGAIN", 20) / 2, GetScreenHeight() / 2 - 50, 20, GRAY);
 
 		EndDrawing();
 	}
@@ -309,26 +322,39 @@ namespace Juego {
 	{
 		switch (Screens)
 		{
+
 		case menu:
 		{
 			MenuUpdate();
+			repeat = 1;
+			//InitGame();
 
 		} break;
+
 		case game:
 		{
 			UpdateDrawFrame();
 
 		} break;
+
 		case credits:
 		{
 			CreditsUpdate();
 
 		} break;
+
 		case controls:
 		{
 			ControlsUpdate();
 
 		} break;
+
+		case over:
+		{
+			OverUpdate();
+
+		} break;
+
 		}
 	}
 

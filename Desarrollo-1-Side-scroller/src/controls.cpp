@@ -7,7 +7,6 @@
 
 namespace Juego
 {
-	static Vector2 mousePoint;
 	static Rectangle rec1;
 
 	void ControlsUpdate()
@@ -40,7 +39,7 @@ namespace Juego
 		ClearBackground(RAYWHITE);
 		DrawText("Espacio para hacer que el jugador suba", 20, 200, 20, BLACK);
 		DrawText("P para pausar", 20, 220, 20, BLACK);
-		DrawText("M para mutear", 20, 220, 20, BLACK);
+		DrawText("M para mutear", 20, 240, 20, BLACK);
 
 		DrawText("atras", rec1.x + 18, rec1.y + 10, 20, WHITE);
 

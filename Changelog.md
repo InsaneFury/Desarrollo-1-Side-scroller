@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.5] - 29-10-2018
+### Añadido
+-Nombre del proyecto cambiado a "Shards"
+-Detalles finales de la pantalal de game over añadidos
+-Bug al intentar re iniciar el juego, se corrije en la proxima version
+
 ## [0.4] - 29-10-2018
 ### Añadido
 - Pantalla de game over

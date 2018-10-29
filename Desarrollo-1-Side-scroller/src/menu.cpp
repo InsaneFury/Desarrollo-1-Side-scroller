@@ -6,7 +6,6 @@
 namespace Juego
 {
 
-	static Vector2 mousePoint;
 	static Rectangle rec1;
 	static Rectangle rec2;
 	static Rectangle rec3;
@@ -72,8 +71,8 @@ namespace Juego
 		DrawText("jugar", rec1.x + 18, rec1.y + 10, 18, WHITE);
 		DrawText("Creditos", rec2.x + 5, rec2.y + 10, 18, WHITE);
 		DrawText("Controles", rec3.x + 5, rec3.y + 10, 18, WHITE);
-		DrawText("Basic side scroler", screenWidth / 2 - 120, 100, 50, MAROON);
-		DrawText("Version 0.3", 10 , screenHeight - 10, 10, MAROON);
+		DrawText("Shards", screenWidth / 2 - 120, 100, 50, MAROON);
+		DrawText("Version 0.5", 10 , screenHeight - 10, 10, MAROON);
 
 		EndDrawing();
 	}
