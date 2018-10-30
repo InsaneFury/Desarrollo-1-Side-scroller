@@ -11,10 +11,11 @@ namespace Juego
 	static void InitGame();
 	static void UpdateGame();
 	static void DrawGame();
-	static void UnloadGame();
 	static void Unload();
-	static void Change();
+	static void UnloadGame();
 	static void UpdateDrawFrame();
+	static void Change();
+	void ReStart();
 
 }
 

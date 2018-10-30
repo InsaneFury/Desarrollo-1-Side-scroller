@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.0] - 29-10-2018
+### Añadido
+-Ultima capa de paralex escroling agregada
+-Ahora se pueden silenciar todos los sonidos
+-Cambios en las instrucciones
+
+## [0.6] - 29-10-2018
+### Añadido
+-Funcion de pausa el juego y para pausar la musica cambiadas a un boton in game
+
 ## [0.5] - 29-10-2018
 ### Añadido
 -Nombre del proyecto cambiado a "Shards"
@@ -17,6 +27,7 @@
 -Se anaden musica y efectos de sonido
 -Se actualizan los creditos con todos los nuevos programas usados
 -Numero de la version agregado al menu
+-Paralex escroling agregado
 
 ## [0.2.2] - 28-10-2018
 ### Añadido
