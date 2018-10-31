@@ -5,56 +5,74 @@
 
 namespace Juego
 {
-
-	static Rectangle rec1;
-	static Rectangle rec2;
-	static Rectangle rec3;
+	static Rectangle jugar;
+	static Color jugarColor;
+	static Rectangle multiplayer;
+	static Color multiplayerColor;
+	static Rectangle creditos;
+	static Color creditosColor;
+	static Rectangle controles;
+	static Color controlesColor;
 
 	void MenuUpdate()
 	{
 		MenuDraw();
 		mousePoint = GetMousePosition();
-		rec1.x = screenWidth / 2 - 50;
-		rec1.y = screenHeight / 2;
-		rec1.height = 50;
-		rec1.width = 100;
+		jugar.x = screenWidth / 2 - jugar.width/2;
+		jugar.y = screenHeight / 2 - 40;
+		jugar.height = 50;
+		jugar.width = 200;
+		jugarColor = MAROON;
 
-		rec2.x = screenWidth / 2 - 50;
-		rec2.y = screenHeight / 2 + 80;
-		rec2.height = 50;
-		rec2.width = 100;
+		multiplayer.x = screenWidth / 2 - multiplayer.width/2;
+		multiplayer.y = screenHeight / 2 + 20;
+		multiplayer.height = 50;
+		multiplayer.width = 200;
+		multiplayerColor = MAROON;
 
-		rec3.x = screenWidth / 2 - 50;
-		rec3.y = screenHeight / 2 + 160;
-		rec3.height = 50;
-		rec3.width = 100;
+		creditos.x = screenWidth / 2 - creditos.width/2;
+		creditos.y = screenHeight / 2 + 80;
+		creditos.height = 50;
+		creditos.width = 200;
+		creditosColor = MAROON;
 
-		if (CheckCollisionPointRec(mousePoint, rec1))
+		controles.x = screenWidth / 2 - controles.width/2;
+		controles.y = screenHeight / 2 + 140;
+		controles.height = 50;
+		controles.width = 200;
+		controlesColor = MAROON;
+
+		if (CheckCollisionPointRec(mousePoint, jugar))
 		{
 
 			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 			{
+				isMultiplayerEnabled = false;
 				Screens = game;
 			}
 		}
-		if (CheckCollisionPointRec(mousePoint, rec2))
+		if (CheckCollisionPointRec(mousePoint, multiplayer))
 		{
-
+			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+			{
+				isMultiplayerEnabled = true;
+				Screens = game;
+			}
+		}
+		if (CheckCollisionPointRec(mousePoint, creditos))
+		{
 			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 			{
 				Screens = credits;
 			}
 		}
-		if (CheckCollisionPointRec(mousePoint, rec3))
+		if (CheckCollisionPointRec(mousePoint, controles))
 		{
-
 			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 			{
 				Screens = controls;
 			}
 		}
-		
-
 	}
 
 	void MenuDraw()
@@ -63,16 +81,24 @@ namespace Juego
 
 		ClearBackground(RAYWHITE);
 
+		DrawRectangle(jugar.x, jugar.y, jugar.width, jugar.height, jugarColor);
+		DrawRectangle(multiplayer.x, multiplayer.y, multiplayer.width, multiplayer.height, multiplayerColor);
+		DrawRectangle(creditos.x, creditos.y, creditos.width, creditos.height, creditosColor);
+		DrawRectangle(controles.x, controles.y, controles.width, controles.height, controlesColor);
 
-		DrawRectangle(rec1.x, rec1.y, rec1.width, rec1.height, BLACK);
-		DrawRectangle(rec2.x, rec2.y, rec2.width, rec2.height, BLACK);
-		DrawRectangle(rec3.x, rec3.y, rec3.width, rec3.height, BLACK);
+		DrawText("JUGAR", jugar.x + jugar.width/2 - MeasureText("JUGAR",18)/2, jugar.y + 18, 18, WHITE);
 
-		DrawText("jugar", rec1.x + 18, rec1.y + 10, 18, WHITE);
-		DrawText("Creditos", rec2.x + 5, rec2.y + 10, 18, WHITE);
-		DrawText("Controles", rec3.x + 5, rec3.y + 10, 18, WHITE);
-		DrawText("Shards", screenWidth / 2 - 120, 100, 50, MAROON);
-		DrawText("Version 1.0", 10 , screenHeight - 10, 10, MAROON);
+		DrawText("MULTIPLAYER", multiplayer.x + multiplayer.width / 2 - MeasureText("MULTIPLAYER", 18) / 2, 
+				                                                             multiplayer.y + 18, 18, WHITE);
+
+		DrawText("CREDITOS", creditos.x + creditos.width / 2 - MeasureText("CREDITOS", 18) / 2, 
+																			 creditos.y + 18, 18, WHITE);
+
+		DrawText("CONTROLES", controles.x + controles.width / 2 - MeasureText("CONTROLES", 18) / 2, 
+																			 controles.y + 18, 18, WHITE);
+
+		DrawText("SHARDS", screenWidth / 2 - MeasureText("SHARDS",80)/2, 80, 80, MAROON);
+		DrawText("v1.1", 10 , screenHeight - 30, 30, MAROON);
 
 		EndDrawing();
 	}

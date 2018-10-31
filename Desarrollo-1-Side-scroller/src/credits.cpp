@@ -3,25 +3,22 @@
 #include "credits.h"
 #include "game.h"
 
-
-
 namespace Juego
 {
-	static Rectangle rec1;
+	static Rectangle atras;
 
 	void CreditsUpdate()
 	{
 		CreditsDraw();
 		mousePoint = GetMousePosition();
 
-		rec1.x = 25;
-		rec1.y = 25;
-		rec1.height = 50;
-		rec1.width = 100;
+		atras.x = 20;
+		atras.y = GetScreenHeight() - atras.height - 25;
+		atras.height = 50;
+		atras.width = 200;
 
-		if (CheckCollisionPointRec(mousePoint, rec1))
+		if (CheckCollisionPointRec(mousePoint, atras))
 		{
-
 			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 			{
 				Screens = menu;
@@ -33,19 +30,17 @@ namespace Juego
 	void CreditsDraw() 
 	{
 		BeginDrawing();
-
-		DrawRectangle(rec1.x, rec1.y, rec1.width, rec1.height, BLACK);
-
 		ClearBackground(RAYWHITE);
-		DrawText("Funciones creadas porIan Eito, Albert Martos, Ramon Santamaria y Damian Iglesias", 20, 200, 20, BLACK);
-		DrawText("Copyright (c) 2015 Ramon Santamaria (@raysan5)", 20, 220, 20, BLACK);
 
-		DrawText("atras", rec1.x + 18, rec1.y + 10, 20, WHITE);
+		DrawRectangle(atras.x, atras.y, atras.width, atras.height, MAROON);
 
-		DrawText("Asteroids, por Martin Concetti", 20, 260, 20, BLACK);
-		DrawText("Creado usando raylib, chip tone, beep box, piskel, ", 130, 280, 20, BLACK);
-		DrawText("Consultantes: Baretto, Sergio", 130, 300, 20, BLACK);
-		DrawText("Version 1.0", 130, 320, 20, BLACK);
+		DrawText("ATRAS", atras.x + atras.width / 2 - MeasureText("ATRAS", 20) / 2, atras.y + 18, 20, WHITE);
+
+		DrawText("Shards, v1.0 Martin Concetti, v1.1 update by Ivan Castellano", 20, 160, 25, MAROON);
+		DrawText("Funciones creadas por Ian Eito, Albert Martos y Ramon Santamaria", 20, 200, 20, LIGHTGRAY);
+		DrawText("Copyright (c) 2015 Ramon Santamaria (@raysan5)", 20, 220, 20, LIGHTGRAY);
+		DrawText("Creado usando raylib, chip tone, beep box, piskel, ", 20, 240, 20, LIGHTGRAY);
+		DrawText("Consultantes: Baretto, Sergio", 20, 260, 20, LIGHTGRAY);
 
 		EndDrawing();
 	}

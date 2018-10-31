@@ -6,16 +6,16 @@ namespace Juego
 
 	enum GameScreen { menu = 0, game, over, credits, controls };
 	extern GameScreen Screens;
-
+	extern bool isMultiplayerEnabled;
+	extern bool gameOver;
 	void core();
-	static void InitGame();
+	void InitGame();
 	static void UpdateGame();
 	static void DrawGame();
-	static void Unload();
 	static void UnloadGame();
-	static void UpdateDrawFrame();
+	static void Unload();
 	static void Change();
-	void ReStart();
+	static void UpdateDrawFrame();
 
 }
 
