@@ -1,5 +1,6 @@
 #ifndef over_H
 #define over_H
+#include "game.h"
 
 namespace Juego
 {

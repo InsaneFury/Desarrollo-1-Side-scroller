@@ -72,7 +72,7 @@ namespace Juego
 		DrawText("Creditos", rec2.x + 5, rec2.y + 10, 18, WHITE);
 		DrawText("Controles", rec3.x + 5, rec3.y + 10, 18, WHITE);
 		DrawText("Shards", screenWidth / 2 - 120, 100, 50, MAROON);
-		DrawText("Version 0.5", 10 , screenHeight - 10, 10, MAROON);
+		DrawText("Version 1.0", 10 , screenHeight - 10, 10, MAROON);
 
 		EndDrawing();
 	}
