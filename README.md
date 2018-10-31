@@ -1,6 +1,7 @@
 <p align="center">
 <img width="1000" src = "https://github.com/InsaneFury/Desarrollo-1-Side-scroller/blob/master/screenshots/title.png">
 </p>
+<<<<<<< HEAD
 
 ## WHAT ABOUT
 Side scroller using c++ & raylib
@@ -9,6 +10,15 @@ Update to v1.1 by Ivan Castellano
 ##SCREENSHOTS
 ## New Features on v1.1
 ## New UI design!
+=======
+# WHAT ABOUT
+Side scroller using c++ & raylib
+Update to v1.1 by Ivan Castellano
+
+#SCREENSHOTS
+## New Features on v1.1
+### New UI design!
+>>>>>>> daccf5a70945fbffa19ed38531583351de83c2db
 <p align="center">
 <img width="1000" src = "https://github.com/InsaneFury/Desarrollo-1-Side-scroller/blob/master/screenshots/1.png">
 </p>
@@ -18,7 +28,11 @@ Update to v1.1 by Ivan Castellano
 <p align="center">
 <img width="1000" src = "https://github.com/InsaneFury/Desarrollo-1-Side-scroller/blob/master/screenshots/3.png">
 </p>
+<<<<<<< HEAD
 ## New multiplayer!
+=======
+### New multiplayer!
+>>>>>>> daccf5a70945fbffa19ed38531583351de83c2db
 <p align="center">
 <img width="1000" src = "https://github.com/InsaneFury/Desarrollo-1-Side-scroller/blob/master/screenshots/4.png">
 </p>
@@ -29,7 +43,11 @@ Update to v1.1 by Ivan Castellano
 <img width="1000" src = "https://github.com/InsaneFury/Desarrollo-1-Side-scroller/blob/master/screenshots/6.png">
 </p>
 
+<<<<<<< HEAD
 ##CONTACT IVAN CASTELLANO
+=======
+#CONTACT IVAN CASTELLANO
+>>>>>>> daccf5a70945fbffa19ed38531583351de83c2db
 ## Skills
 - **C++/C# Programmer**
 - **Graphic Designer**
