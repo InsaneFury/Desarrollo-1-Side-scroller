@@ -34,7 +34,6 @@ Update to v1.1 by Ivan Castellano
 </p>
 
 #CONTACT IVAN CASTELLANO
-
 ## Skills
 - **C++/C# Programmer**
 - **Graphic Designer**
