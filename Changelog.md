@@ -1,4 +1,19 @@
-# Changelog
+# SHARDS Change log
+
+All notable changes to this project will be documented in this file.
+
+## [1.1] - 2018-10-31 - by Ivan Castellano
+### Added
+- Added screenshot
+- Added multiplayer
+- Added retry function
+
+### Changed
+- Update README
+- Update CHANGELOG
+- Credits Update
+- New UI design
+
 
 ## [0.5] - 29-10-2018
 ### Añadido
